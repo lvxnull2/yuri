@@ -1,0 +1,20 @@
+[Unit]
+Description=A template for running my silly little containers via podman-play-kube
+Documentation=man:podman-play-kube(1)
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=%t/containers
+
+[Service]
+WorkingDirectory=/srv/containers/%I
+Environment=PODMAN_SYSTEMD_UNIT=%n
+TimeoutStopSec=70
+ExecStart=/usr/bin/podman play kube --replace --service-container=true deployment.yaml
+ExecStop=/usr/bin/podman play kube --down deployment.yaml
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=default.target
+
+# vim: ft=systemd
