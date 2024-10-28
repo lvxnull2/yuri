@@ -8,6 +8,7 @@ RequiresMountsFor=%t/containers
 [Service]
 WorkingDirectory=/srv/containers/%I
 Environment=PODMAN_SYSTEMD_UNIT=%n
+TimeoutStartSec=infinity
 TimeoutStopSec=70
 ExecStart=/usr/bin/podman play kube --replace --service-container=true deployment.yaml
 ExecStop=/usr/bin/podman play kube --down deployment.yaml
