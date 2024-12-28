@@ -12,8 +12,8 @@ EnvironmentFile=-/srv/containers/%I/systemd.env
 Environment=PODMAN_SYSTEMD_UNIT=%n
 TimeoutStartSec=infinity
 TimeoutStopSec=70
-ExecStart=/usr/bin/podman play kube --replace --service-container=true --log-driver $PODMAN_LOG_DRIVER pod.yaml
-ExecStop=/usr/bin/podman play kube --down pod.yaml
+ExecStart=/usr/bin/podman kube play --replace --service-container=true --log-driver $PODMAN_LOG_DRIVER pod.yaml
+ExecStop=/usr/bin/podman kube down pod.yaml
 Type=notify
 NotifyAccess=all
 
